@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "VerbAI - Smart Summarizer & Learning Assistant",
+  "version": "1.0.0",
+  "description": "Summarize articles, YouTube videos, PDFs, and web pages instantly with AI. Learn faster with VerbAI - your intelligent content assistant.",
+  "permissions": ["activeTab", "storage", "sidePanel", "scripting","contextMenus", "clipboardWrite", "clipboardRead"],
+  "host_permissions": ["http://localhost:5050/*", "https://www.youtube.com/*", "http://localhost/verbai/*", "https://*.verbai.app/*"],
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "VerbAI - Smart Summarizer & Learning Assistant"
+  },
+  "side_panel": {
+    "default_path": "sidepanel/sidepanel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/watch*"],
+      "js": ["content/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background/background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

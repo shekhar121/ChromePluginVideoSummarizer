@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>VerbAI - Smart Summarizer & Learning Assistant</title>
+        <link rel="stylesheet" href="sidepanel.css" />
+    </head>
+    <body>
+        <div class="sidepanel-container">
+            <!-- Header -->
+            <div class="sidepanel-header">
+                <div class="header-content">
+                    <div class="logo">✨</div>
+                    <div class="header-text">
+                        <h1>VerbAI - Smart Summarizer</h1>
+                        <p>Learn faster - your intelligent learning assistant.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Header Actions Buttons-->
+            <div class="sidepanel-footer hidden" id="sidepanel-footer">
+                <button class="btn btn-primary" id="summarize-btn">
+                    <span>✨</span>
+                    Generate Summary
+                </button>
+                <button class="btn btn-primary" id="summarize-btn-ai-generated">
+                    <span>✨</span>
+                    AI-Generated Summary
+                </button>
+                <button class="btn btn-primary" id="original-transcript-btn">
+                    <span>📄</span>
+                    Original Transcript
+                </button>
+                <button class="btn btn-secondary" id="copy-btn">
+                    <span>📋</span>
+                    Copy
+                </button>
+            </div>
+
+            <!-- Content Area -->
+            <div class="sidepanel-content" id="sidepanel-content">
+                <!-- Not on YouTube State -->
+                <div
+                    class="state-container not-youtube-state hidden"
+                    id="not-youtube"
+                >
+                    <div class="icon-large">📺</div>
+                    <h2>Open a YouTube Video</h2>
+                    <p>
+                        This extension works only on YouTube video pages. Please
+                        navigate to a YouTube video to get started.
+                    </p>
+                    <div class="instructions">
+                        <h3>How to use:</h3>
+                        <ol>
+                            <li>Go to <strong>youtube.com</strong></li>
+                            <li>Open any video you want to summarize</li>
+                            <li>
+                                Click the
+                                <strong>Generate Summary</strong> button
+                            </li>
+                            <li>Get AI-powered insights instantly!</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Initial State -->
+                <div class="state-container initial-state" id="initial">
+                    <div class="icon-large">🎥</div>
+                    <h2>Ready to Summarize</h2>
+                    <p>
+                        Get an AI-powered summary of the current YouTube video
+                        with key points and insights.
+                    </p>
+                    <button class="btn btn-primary" id="summarize-btn222">
+                        <span>✨</span>
+                        Generate Summary
+                    </button>
+                </div>
+
+                <!-- Loading State -->
+                <div class="state-container loading-state hidden" id="loading">
+                    <div class="spinner"></div>
+                    <h2 id="loading-text">Generating Transcript from the video...</h2>
+                    <p>This may take a few seconds. Please wait...</p>
+                </div>
+
+                <!-- Error State -->
+                <div class="state-container error-state hidden" id="error">
+                    <div class="icon-large">⚠️</div>
+                    <h2>Oops! Transcript not available</h2>
+                    <p id="error-message">An unexpected error occurred</p>
+                    <div class="error-help hidden" id="error-help">
+                        <h3>💡 Troubleshooting Tips:</h3>
+                        <ul>
+                            <li>
+                                Make sure the video has
+                                <strong>captions/subtitles</strong> enabled
+                            </li>
+                            <li>
+                                Try refreshing the page and generating summary
+                                again
+                            </li>
+                            <li>
+                                Some videos may not have transcripts available
+                            </li>
+                        </ul>
+                    </div><br>
+                    <button class="btn btn-primary" id="retry-btn">
+                        <span>🔄</span>
+                        Try Again
+                    </button>
+                </div>
+
+                <!-- default Transcript State -->
+                <div class="summary-container hidden" id="transcript-content">
+
+
+                    <!-- default Transcript Section -->
+                    <div class="section">
+                        <h2 class="video-title" id="transcript-video-title">
+                            Video Title
+                        </h2>
+                        <h3 class="section-title">
+                            <span class="section-icon">📄</span>
+                            <span>Original Transcript (Full)</span>
+                        </h3>
+                        <div class="summary-text" id="transcript-text">
+                            Transcript content will appear here...
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Summary State -->
+                <div class="summary-container hidden" id="summary-content">
+                    <!-- Video Info
+                    <div class="video-info">
+                        <h2 class="video-title" id="video-title">
+                            Video Title
+                        </h2>
+                        <div class="video-meta">
+                            <span class="cache-badge hidden" id="cache-info"
+                                >⚡ From Cache</span
+                            >
+                        </div>
+                    </div>-->
+
+                    <!-- Summary Section -->
+                    <div class="section">
+                        <!--<div class="section-buttons">
+                            <button class="btn btn-primary" id="summarize-btn">
+                                <span>✨</span>
+                                Generate Summary
+                            </button>
+                            <button class="btn btn-primary" id="summarize-timestamped-btn">
+                                <span>✨</span>
+                                Generate Summary (Timestamped)
+                            </button>
+                        </div>-->
+                        <h2 class="video-title" id="summary-video-title">
+                            Video Title
+                        </h2>
+                        <h3 class="section-title">
+                            <span class="section-icon">📄</span>
+                            Short Summary (Generated by AI)
+                        </h3>
+                        <div class="summary-text" id="summary-text">
+                            Summary content will appear here...
+                        </div>
+                    </div>
+
+                    <!-- Key Points Section -->
+                    <div class="section hidden" id="key-points-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">✨</span>
+                            Key Takeaways
+                        </h3>
+                        <ul class="points-list" id="key-points-list"></ul>
+                    </div>
+                    <!-- Key examples Section -->
+                    <div class="section hidden" id="key-examples-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">✨</span>
+                            Key Examples
+                        </h3>
+                        <ul class="points-list" id="key-examples-list"></ul>
+                    </div>
+                    <!-- Key quotes Section -->
+                    <div class="section hidden" id="key-quotes-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">✨</span>
+                            Key Quotes
+                        </h3>
+                        <ul class="points-list" id="key-quotes-list"></ul>
+                    </div>
+                    <!-- Key references Section -->
+                    <div class="section hidden" id="key-references-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">✨</span>
+                            Key References
+                        </h3>
+                        <ul class="points-list" id="key-references-list"></ul>
+                    </div>
+                    <!-- Topics Section -->
+                    <div class="section hidden" id="timestamps-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">🎯</span>
+                            Summary of Important Topics Covered with Timestamps
+                        </h3>
+                        <div class="topics-list" id="timestamps-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="sidepanel-footer" id="sidepanel-footer2">
+
+                <!--<button class="btn btn-primary" id="new-summary-btn">
+                    <span>🔄</span>
+                    New Summary
+                </button>
+                <button class="btn btn-primary" id="summarize-btn123">
+                    <span>✨</span>
+                    Generate Summary
+                </button>
+                <button class="btn btn-secondary" id="copy-btn">
+                    <span>📋</span>
+                    Copy
+                </button>-->
+                <marquee class="footer-text" behavior="scroll" direction="right" scrollamount="1">find us on <a href="https://verbai.app" target="_blank">VerbAI.app</a></marquee>
+            </div>
+        </div>
+
+        <script src="sidepanel.js"></script>
+    </body>
+</html>

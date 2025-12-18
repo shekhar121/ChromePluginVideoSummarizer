@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Summarizer</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <div class="popup-header">
+      <div class="header-content">
+        <div class="logo">📝</div>
+        <div class="header-text">
+          <h1>AI Video Summary</h1>
+          <p>Powered by OpenAI</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="popup-content" id="popup-content">
+      <!-- Initial State -->
+      <div class="state-container initial-state" id="initial">
+        <div class="icon-large">🎥</div>
+        <h2>Ready to Summarize</h2>
+        <p>Get an AI-powered summary of the current YouTube video with key points and insights.</p>
+        <button class="btn btn-primary" id="summarize-btn">
+          <span>✨</span>
+          Generate Summary
+        </button>
+      </div>
+
+      <!-- Loading State -->
+      <div class="state-container loading-state hidden" id="loading">
+        <div class="spinner"></div>
+        <h2>Generating Summary...</h2>
+        <p>This may take a few seconds</p>
+      </div>
+
+      <!-- Error State -->
+      <div class="state-container error-state hidden" id="error">
+        <div class="icon-large">⚠️</div>
+        <h2>Oops! Something went wrong</h2>
+        <p id="error-message">An unexpected error occurred</p>
+        <button class="btn btn-primary" id="retry-btn">
+          <span>🔄</span>
+          Try Again
+        </button>
+      </div>
+
+      <!-- Summary State -->
+      <div class="summary-container hidden" id="summary-content">
+        <!-- Video Info -->
+        <div class="video-info">
+          <h2 class="video-title" id="video-title">Video Title</h2>
+          <div class="video-meta">
+            <span class="cache-badge hidden" id="cache-info">⚡ From Cache</span>
+          </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="section">
+          <h3 class="section-title">
+            <span class="section-icon">📄</span>
+            Summary
+          </h3>
+          <div class="summary-text" id="summary-text">
+            Summary content will appear here...
+          </div>
+        </div>
+
+        <!-- Key Points Section -->
+        <div class="section hidden" id="key-points-section">
+          <h3 class="section-title">
+            <span class="section-icon">✨</span>
+            Key Points
+          </h3>
+          <ul class="points-list" id="key-points-list"></ul>
+        </div>
+
+        <!-- Topics Section -->
+        <div class="section hidden" id="timestamps-section">
+          <h3 class="section-title">
+            <span class="section-icon">🎯</span>
+            Topics Covered
+          </h3>
+          <div class="topics-list" id="timestamps-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="popup-footer hidden" id="popup-footer">
+      <button class="btn btn-secondary" id="copy-btn">
+        <span>📋</span>
+        Copy
+      </button>
+      <button class="btn btn-primary" id="new-summary-btn">
+        <span>🔄</span>
+        New Summary
+      </button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
